@@ -1,7 +1,11 @@
-export default function Buttons() {
+export default function Buttons(props) {
   return (
     <div className="buttons flex flex-row">
-      <button className="pt-[8px] pb-[6px] px-[18px] rounded bg-gray-700 text-white ml-auto">
+      <button
+        className={`pt-[8px] pb-[6px] px-[18px] rounded bg-gray-700 text-white ml-auto hover:opacity-75 transition ease-in-out duration-[2000ms]`}
+        onClick={props.onClick}
+        id="btn"
+      >
         New quote
       </button>
     </div>
