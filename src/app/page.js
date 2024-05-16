@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [color, setColor] = useState('#374151')
+  const [animate, setAnimate] = useState(false)
 
   const calcLuminance = (hex) => {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
@@ -22,7 +23,7 @@ export default function Home() {
     return 0.2126 * r + 0.7152 * g + 0.0722 * b
   }
 
-  const getRandomHexColor = () => {
+  const handleClick = () => {
     let letters = '0123456789ABCDEF'
     let color = '#'
     do {
@@ -31,17 +32,11 @@ export default function Home() {
         color += letters[Math.floor(Math.random() * 16)]
       }
     } while (calcLuminance(color) >= 0.179)
-    return color
-  }
-
-  const getRandomColor = () => {
-    let randomColor = getRandomHexColor()
-    const main = document.querySelector('main')
-    const button = document.getElementById('btn')
-    const quote = document.querySelector('.quote')
-    main.style.backgroundColor = randomColor
-    button.style.backgroundColor = randomColor
-    quote.style.fill = randomColor
+    setColor(color)
+    setAnimate(true)
+    setTimeout(() => {
+      setAnimate(false)
+    }, 2000)
   }
 
   return (
@@ -49,10 +44,15 @@ export default function Home() {
       className={`flex flex-col min-h-screen items-center justify-center bg-gray-700 transition ease-in-out duration-[2000ms]`}
     >
       <div className="flex flex-col card bg-white min-h-[300px] w-[550px] px-[40px] py-[50px] rounded justify-between">
-        <QuoteText />
-        <QuoteAuthor />
-        <Buttons onClick={getRandomColor} />
+        <QuoteText color={color} animate={animate} />
+        <QuoteAuthor color={color} animate={animate} />
+        <Buttons color={color} onClick={handleClick} />
       </div>
+      <style jsx>{`
+        main {
+          background-color: ${color};
+        }
+      `}</style>
     </main>
   )
 }
