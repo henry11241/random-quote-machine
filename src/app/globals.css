@@ -20,3 +20,7 @@
 .fadeIn {
   animation: fadeIn 2s;
 }
+
+#twitter-icon, #facebook-icon {
+  fill: white;
+}

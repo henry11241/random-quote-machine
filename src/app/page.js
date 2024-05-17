@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [color, setColor] = useState('#374151')
+  const [quote, setQuote] = useState("")
   
   const calcLuminance = (hex) => {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
@@ -58,7 +59,7 @@ export default function Home() {
       const { content, author } = data
       quote.innerText = content
       quoteAuthor.innerText = author
-
+      setQuote(`"${content}" ${author}`)
     } catch (err) {
       console.log(err)
     }
@@ -76,7 +77,7 @@ export default function Home() {
       <div className="flex flex-col card bg-white min-h-[300px] w-[550px] px-[40px] py-[50px] rounded justify-between gap-8">
         <QuoteText color={color} />
         <QuoteAuthor color={color} />
-        <Buttons color={color} onClick={handleClick} />
+        <Buttons color={color} onClick={handleClick} quote={quote} />
       </div>
       <style jsx>{`
         main {

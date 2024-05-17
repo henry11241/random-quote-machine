@@ -5,7 +5,7 @@ export default function QuoteText({ color }) {
     <div
       className={`quote-text max-h-[200px] flex justify-center transition ease-in-out duration-[2000ms]`}
     >
-      <p>
+      <p className="text-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"
